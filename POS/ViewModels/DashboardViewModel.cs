@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,6 +22,17 @@ namespace POS.ViewModels
             get { return _message; }
         }
 
+        public Purchase _purchase;
+        public Purchase Purchase
+        {
+            set
+            {
+                _purchase = value;
+                OnPropertyChanged("purchase");
+            }
+            get { return _purchase; }
+        }
+
         public ICommand MyCommand { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -32,12 +44,15 @@ namespace POS.ViewModels
 
         public DashboardViewModel()
         {
+            Purchase = new Purchase();
             Message = "hello heaven";
             MyCommand = new CustomCommand(ChangeExecute);
         }
         private void ChangeExecute()
         {
             Message += "changed message";
+            Purchase.Message += "added message";
+            Purchase.ChangeVie();
         }
     }
 
