@@ -24,7 +24,12 @@ namespace POS.Views
         {
             InitializeComponent();
 
-            this.DataContext = new DashboardViewModel();
+            this.DataContext = new DashboardViewModel(this);
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ((DashboardViewModel)this.DataContext).SelectionChangedExecute(sender);
         }
     }
 }

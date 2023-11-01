@@ -1,10 +1,13 @@
-﻿using POS.Service;
+﻿using POS.Models;
+using POS.Service;
+using POS.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace POS.ViewModels
@@ -22,8 +25,8 @@ namespace POS.ViewModels
             get { return _message; }
         }
 
-        public Purchase _purchase;
-        public Purchase Purchase
+        public Die _purchase;
+        public Die Purchase
         {
             set
             {
@@ -35,24 +38,35 @@ namespace POS.ViewModels
 
         public ICommand MyCommand { get; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public Dashboard View;
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        public DashboardViewModel(Dashboard view)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public DashboardViewModel()
-        {
-            Purchase = new Purchase();
+            View = view;
+            Purchase = new Die();
             Message = "hello heaven";
             MyCommand = new CustomCommand(ChangeExecute);
         }
+
         private void ChangeExecute()
         {
             Message += "changed message";
             Purchase.Message += "added message";
             Purchase.ChangeVie();
+        }
+
+        public void SelectionChangedExecute(object sender)
+        {
+            DummyClass dc = (DummyClass)((DataGrid)sender).CurrentItem;
+            Purchase.Vie.SelectedItem = dc;
+            View.RowPopup.IsOpen = true;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

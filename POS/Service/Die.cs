@@ -1,6 +1,7 @@
 ﻿using POS.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace POS.Service
 {
-    public class Purchase : INotifyPropertyChanged
+    public class Die : INotifyPropertyChanged
     {
         public string _message;
         public string Message
@@ -33,16 +34,40 @@ namespace POS.Service
             get { return _vie; }
         }
 
-        public Purchase()
+        public ObservableCollection<DummyClass> _data;
+        public ObservableCollection<DummyClass> Data
+        {
+            set
+            {
+                _data = value;
+                OnPropertyChanged("dataa");
+            }
+            get { return _data; }
+        }
+        public static int Count = 1;
+        public Die()
         {
             Message = "hello saik";
             Vie = new Vie();
             Vie.Message = "Vie message";
+            Data = Vie.Data;
         }
 
         public void ChangeVie()
         {
             Vie.Message += "message changed";
+            
+            if(Count == 1)
+            {
+                Vie.AddToData();
+            }
+            else
+            {
+                Vie.ChangeData();
+                Vie.Data.RemoveAt(0);
+            }
+
+            Count = Count + 1;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

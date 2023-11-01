@@ -5,12 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POS.Views"
         mc:Ignorable="d"
-        Title="Dashboard" Height="450" Width="800">
+        Title="Dashboard" WindowStyle="ToolWindow" WindowState="Maximized" 
+        Background="AliceBlue" ResizeMode="CanResize" AllowsTransparency="False">
     
     <Grid>
         <StackPanel>
             <TextBlock Text="{Binding Purchase.Vie.Message}"></TextBlock>
+            <TextBlock Text="{Binding Purchase.Vie.SelectedItem.Name}"></TextBlock>
             <Button Command="{Binding MyCommand}">change text</Button>
+
+            <DataGrid
+                  ItemsSource="{Binding Purchase.Data}" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="False"
+                  CanUserAddRows="True" 
+                  CanUserDeleteRows="True" 
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow"
+                  MaxHeight="399"
+                Margin="9"
+                MinRowHeight="29"
+                MinColumnWidth="199"
+                CanUserSortColumns="False"
+                SelectionChanged="DataGrid_SelectionChanged"
+                >
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="DarkGray" />
+                        <Setter Property="Foreground" Value="PapayaWhip" />
+                        <Setter Property="FontSize" Value="23"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="AntiqueWhite" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <!-- Add more setters for additional styles -->
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Resources>
+                    <Style TargetType="ScrollViewer">
+                        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+                    </Style>
+                    <Style TargetType="{x:Type ScrollBar}">
+                        <Setter Property="BorderBrush" Value="DarkRed" />
+                        <Setter Property="Background" Value="Red" />
+                        <Setter Property="Width" Value="2" />
+                        <Setter Property="MaxWidth" Value="2" />
+                        <!-- Add more setters for additional styles -->
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
         </StackPanel>
+        <Popup Name="RowPopup" StaysOpen="True" IsOpen="False" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border Background="White" BorderBrush="Black" BorderThickness="5" Padding="10">
+                <StackPanel>
+                    <TextBlock Text="{Binding Purchase.Vie.SelectedItem.Name}" />
+
+                    <TextBlock Text="hello this is me" />
+                </StackPanel>
+            </Border>
+        </Popup>
     </Grid>
 </Window>
