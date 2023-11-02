@@ -19,7 +19,7 @@ namespace POS
             base.OnStartup(e);
 
             // Create an instance of your main window (View)
-            var mainWindow = new Shell();
+            var mainWindow = new Kai();
 
             // Show the main window
             mainWindow.Show();

@@ -30,5 +30,10 @@ namespace POS.Views
         {
             ((KaiViewModel)this.DataContext).SelectionChangedExecute(sender);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ((KaiViewModel)this.DataContext).SelectionExecute(sender);
+        }
     }
 }

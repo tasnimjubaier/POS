@@ -60,6 +60,12 @@ namespace POS.ViewModels
         public void SelectionChangedExecute(object sender)
         {
             DummyClass dc = (DummyClass)((DataGrid)sender).CurrentItem;
+            //Purchase.Vie.SelectedItem = dc;
+        }
+
+        public void SelectionExecute(object sender)
+        {
+            DummyClass dc = (DummyClass)((Button)sender).DataContext;
             Purchase.Vie.SelectedItem = dc;
         }
 
