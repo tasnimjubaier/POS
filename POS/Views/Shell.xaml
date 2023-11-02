@@ -18,7 +18,7 @@
                 
                 <Border Grid.Column="0" Background="{StaticResource PrimaryColor}">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="hi"></TextBlock>
+                        <Label Height="200" />
                         <Button Command="{Binding SwitchCommand}" CommandParameter="Purchase" Style="{StaticResource NavigationButton}" Content="Purchase" />
                         <Button Command="{Binding SwitchCommand}" CommandParameter="Employee" Style="{StaticResource NavigationButton}" Content="Employee" />
                         <Button Command="{Binding SwitchCommand}" CommandParameter="Bills" Style="{StaticResource NavigationButton}" Content="Bills" />
