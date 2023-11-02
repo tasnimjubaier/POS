@@ -6,14 +6,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace POS.ViewModels
 {
-    public class DashboardViewModel : IViewModel, INotifyPropertyChanged
+    public class EmployeeViewModel : IViewModel, INotifyPropertyChanged
     {
-
         public UserControl _view;
         public UserControl View
         {
@@ -25,13 +23,13 @@ namespace POS.ViewModels
             get { return _view; }
         }
 
-        public DashboardViewModel()
+        public EmployeeViewModel()
         {
-            View = new Dashboard();
+            View = new EmployeeView();
             View.DataContext = this;
         }
 
-    
+
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler? PropertyChanged;
