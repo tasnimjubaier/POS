@@ -8,33 +8,33 @@ using System.Threading.Tasks;
 
 namespace POS.Models
 {
-    public class PurchaseModel : INotifyPropertyChanged
+    public class CustomerModel : INotifyPropertyChanged
     {
-        private static PurchaseModel? _instance;
+        private static CustomerModel? _instance;
 
 
-        public ObservableCollection<Purchase> _purchases;
-        public ObservableCollection<Purchase> Purchases
+        public ObservableCollection<Customer> _customers;
+        public ObservableCollection<Customer> Customers
         {
             set
             {
-                _purchases = value;
-                OnPropertyChanged("purchases");
+                _customers = value;
+                OnPropertyChanged("customers");
             }
-            get { return _purchases; }
+            get { return _customers; }
         }
 
-        public PurchaseModel()
+        public CustomerModel()
         {
-            Purchases = new ObservableCollection<Purchase>();
+            Customers = new ObservableCollection<Customer>();
             GetDataFromDB();
         }
 
-        public static PurchaseModel GetInstance()
+        public static CustomerModel GetInstance()
         {
             if (_instance == null)
             {
-                _instance = new PurchaseModel();
+                _instance = new CustomerModel();
             }
             return _instance;
         }
@@ -45,11 +45,6 @@ namespace POS.Models
         public void GetDataFromDB()
         {
 
-        }
-
-        public void AddPurchase(Purchase purchase)
-        {
-            Purchases.Add(purchase);
         }
 
         #endregion
@@ -66,7 +61,7 @@ namespace POS.Models
         #endregion
     }
 
-    public class Purchase : INotifyPropertyChanged
+    public class Customer : INotifyPropertyChanged
     {
 
         #region Properties
@@ -82,17 +77,6 @@ namespace POS.Models
             get { return _id; }
         }
 
-        public DateTime _date;
-        public DateTime Date
-        {
-            set
-            {
-                _date = value;
-                OnPropertyChanged("date");
-            }
-            get { return _date; }
-        }
-
         public string? _name;
         public string? Name
         {
@@ -104,25 +88,32 @@ namespace POS.Models
             get { return _name; }
         }
 
-        public int _amount;
-        public int Amount
+        public string? _address;
+        public string? Address
         {
             set
             {
-                _amount = value;
-                OnPropertyChanged("amount");
+                _address = value;
+                OnPropertyChanged("address");
             }
-            get { return _amount; }
+            get { return _address; }
+        }
+
+        public ObservableCollection<Bill> _bills;
+        public ObservableCollection<Bill> Bills
+        {
+            set
+            {
+                _bills = value;
+                OnPropertyChanged("bills");
+            }
+            get { return _bills; }
         }
 
         #endregion
 
-        public Purchase(int id, DateTime dateTime, string name, int amount)
+        public Customer()
         {
-            Id = id;
-            Date = dateTime;
-            Name = name;
-            Amount = amount;
         }
 
         #region INotifyPropertyChanged

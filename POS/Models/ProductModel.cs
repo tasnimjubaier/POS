@@ -8,33 +8,33 @@ using System.Threading.Tasks;
 
 namespace POS.Models
 {
-    public class PurchaseModel : INotifyPropertyChanged
+    public class ProductModel : INotifyPropertyChanged
     {
-        private static PurchaseModel? _instance;
+        private static ProductModel? _instance;
 
 
-        public ObservableCollection<Purchase> _purchases;
-        public ObservableCollection<Purchase> Purchases
+        public ObservableCollection<Product> _products;
+        public ObservableCollection<Product> Products
         {
             set
             {
-                _purchases = value;
-                OnPropertyChanged("purchases");
+                _products = value;
+                OnPropertyChanged("products");
             }
-            get { return _purchases; }
+            get { return _products; }
         }
 
-        public PurchaseModel()
+        public ProductModel()
         {
-            Purchases = new ObservableCollection<Purchase>();
+            Products = new ObservableCollection<Product>();
             GetDataFromDB();
         }
 
-        public static PurchaseModel GetInstance()
+        public static ProductModel GetInstance()
         {
             if (_instance == null)
             {
-                _instance = new PurchaseModel();
+                _instance = new ProductModel();
             }
             return _instance;
         }
@@ -45,11 +45,6 @@ namespace POS.Models
         public void GetDataFromDB()
         {
 
-        }
-
-        public void AddPurchase(Purchase purchase)
-        {
-            Purchases.Add(purchase);
         }
 
         #endregion
@@ -66,7 +61,7 @@ namespace POS.Models
         #endregion
     }
 
-    public class Purchase : INotifyPropertyChanged
+    public class Product : INotifyPropertyChanged
     {
 
         #region Properties
@@ -82,17 +77,6 @@ namespace POS.Models
             get { return _id; }
         }
 
-        public DateTime _date;
-        public DateTime Date
-        {
-            set
-            {
-                _date = value;
-                OnPropertyChanged("date");
-            }
-            get { return _date; }
-        }
-
         public string? _name;
         public string? Name
         {
@@ -104,25 +88,54 @@ namespace POS.Models
             get { return _name; }
         }
 
-        public int _amount;
-        public int Amount
+        public Unit _unit;
+        public Unit Unit
         {
             set
             {
-                _amount = value;
-                OnPropertyChanged("amount");
+                _unit = value;
+                OnPropertyChanged("unit");
             }
-            get { return _amount; }
+            get { return _unit; }
+        }
+
+        public int _unitPrice;
+        public int UnitPrice
+        {
+            set
+            {
+                _unitPrice = value;
+                OnPropertyChanged("unitPrice");
+            }
+            get { return _unitPrice; }
+        }
+
+        public int _inStock;
+        public int InStock
+        {
+            set
+            {
+                _inStock = value;
+                OnPropertyChanged("inStock");
+            }
+            get { return _inStock; }
+        }
+
+        public string? _category;
+        public string? Category
+        {
+            set
+            {
+                _category = value;
+                OnPropertyChanged("category");
+            }
+            get { return _category; }
         }
 
         #endregion
 
-        public Purchase(int id, DateTime dateTime, string name, int amount)
+        public Product()
         {
-            Id = id;
-            Date = dateTime;
-            Name = name;
-            Amount = amount;
         }
 
         #region INotifyPropertyChanged
@@ -135,5 +148,11 @@ namespace POS.Models
         }
 
         #endregion
+    }
+
+    public enum Unit
+    {
+        Dozen,
+        Piece
     }
 }
