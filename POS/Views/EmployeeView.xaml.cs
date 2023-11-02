@@ -1,5 +1,4 @@
-﻿using POS.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace POS.Views
 {
     /// <summary>
-    /// Interaction logic for Dashboard.xaml
+    /// Interaction logic for Employee.xaml
     /// </summary>
-    public partial class Dashboard : UserControl
+    public partial class EmployeeView : UserControl
     {
-        public Dashboard()
+        public EmployeeView()
         {
             InitializeComponent();
         }

@@ -11,19 +11,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace POS.Views
 {
     /// <summary>
-    /// Interaction logic for Dashboard.xaml
+    /// Interaction logic for Kai.xaml
     /// </summary>
-    public partial class Dashboard : UserControl
+    public partial class Kai : Window
     {
-        public Dashboard()
+        public Kai()
         {
             InitializeComponent();
+            this.DataContext = new KaiViewModel(this);
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ((KaiViewModel)this.DataContext).SelectionChangedExecute(sender);
         }
     }
 }

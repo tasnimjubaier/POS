@@ -1,4 +1,5 @@
-﻿using POS.ViewModels;
+﻿using POS.Interfaces;
+using POS.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace POS.Views
@@ -19,11 +19,13 @@ namespace POS.Views
     /// <summary>
     /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class Dashboard : UserControl
+    public partial class Shell : Window
     {
-        public Dashboard()
+        public Shell()
         {
             InitializeComponent();
+
+            this.DataContext = new ShellViewModel(this);
         }
     }
 }

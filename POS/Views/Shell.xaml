@@ -1,0 +1,60 @@
+﻿<Window x:Class="POS.Views.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POS.Views"
+        mc:Ignorable="d"
+        Title="Shell" WindowStyle="ToolWindow" WindowState="Maximized" 
+        Background="AliceBlue" ResizeMode="CanResize" AllowsTransparency="False">
+
+    <Grid>
+        <Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="80*" />
+                </Grid.ColumnDefinitions>
+                
+                <Border Grid.Column="0" Background="{StaticResource PrimaryColor}">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="hi"></TextBlock>
+                        <Button Command="{Binding SwitchCommand}" CommandParameter="Purchase" Style="{StaticResource NavigationButton}" Content="Purchase" />
+                        <Button Command="{Binding SwitchCommand}" CommandParameter="Employee" Style="{StaticResource NavigationButton}" Content="Employee" />
+                        <Button Command="{Binding SwitchCommand}" CommandParameter="Bills" Style="{StaticResource NavigationButton}" Content="Bills" />
+                        <Button Command="{Binding SwitchCommand}" CommandParameter="Customers" Style="{StaticResource NavigationButton}" Content="Customers" />
+                        <Button Command="{Binding SwitchCommand}" CommandParameter="Products" Style="{StaticResource NavigationButton}" Content="Products" />
+                        <Button Command="{Binding SwitchCommand}" CommandParameter="Stock" Style="{StaticResource NavigationButton}" Content="Stock" />
+                        <Button Command="{Binding SwitchCommand}" CommandParameter="BillCollection" Style="{StaticResource NavigationButton}" Content="Bill Collection" />
+                    </StackPanel>
+                </Border>
+                
+                <Border Grid.Column="1" Background="LightCyan">
+                    <ContentControl Content="{Binding ContentViewModel.View}" />
+                </Border>
+            </Grid>
+        </Border>
+        <Border x:Name="LoadingView" Background="#70000000" Visibility="Collapsed">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Circular Progress Indicator (animated spinner) -->
+                    <Border Grid.Row="0" Width="50" Height="50" Background="LightGray" CornerRadius="25">
+                        <Border Width="30" Height="30" Background="Transparent">
+                            <Border Width="20" Height="20" Background="LightGray" CornerRadius="10">
+                                <!-- You can add an animated spinner here -->
+                            </Border>
+                        </Border>
+                    </Border>
+
+                    <!-- Loading Text -->
+                    <TextBlock Grid.Row="1" Text="Loading..." FontSize="16" Margin="0,10" />
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
