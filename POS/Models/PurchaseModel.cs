@@ -42,9 +42,9 @@ namespace POS.Models
 
         #region Methods
 
-        public void GetDataFromDB()
+        public async Task GetDataFromDB()
         {
-
+            await Task.Delay(1000);
         }
 
         public void AddPurchase(Purchase purchase)
@@ -82,8 +82,8 @@ namespace POS.Models
             get { return _id; }
         }
 
-        public DateTime _date;
-        public DateTime Date
+        public string _date;
+        public string Date
         {
             set
             {
@@ -117,7 +117,7 @@ namespace POS.Models
 
         #endregion
 
-        public Purchase(int id, DateTime dateTime, string name, int amount)
+        public Purchase(int id, string dateTime, string name, int amount)
         {
             Id = id;
             Date = dateTime;

@@ -2,6 +2,7 @@
 using POS.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -37,37 +38,37 @@ namespace POS.Service
             }
 
             string filePath = Path.Combine(appDataFolder, JsonFiles[0]);
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 File.WriteAllText(filePath, "[]");
             }
 
             filePath = Path.Combine(appDataFolder, JsonFiles[1]);
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 File.WriteAllText(filePath, "[]");
             }
 
             filePath = Path.Combine(appDataFolder, JsonFiles[2]);
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 File.WriteAllText(filePath, "[]");
             }
 
             filePath = Path.Combine(appDataFolder, JsonFiles[3]);
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 File.WriteAllText(filePath, "[]");
             }
 
             filePath = Path.Combine(appDataFolder, JsonFiles[4]);
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 File.WriteAllText(filePath, "[]");
             }
 
             filePath = Path.Combine(appDataFolder, JsonFiles[5]);
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 File.WriteAllText(filePath, "[]");
             }
@@ -82,9 +83,9 @@ namespace POS.Service
 
         #region Write Data
 
-        public async void WritePurchases(PurchaseModel purchaseModel)
+        public async Task WritePurchases(ObservableCollection<Purchase> purchases)
         {
-            string jsonData = JsonConvert.SerializeObject(purchaseModel);
+            string jsonData = JsonConvert.SerializeObject(purchases);
             string filePath = GetFile(0);
             await File.WriteAllTextAsync(filePath, jsonData);
         }
@@ -128,9 +129,9 @@ namespace POS.Service
 
         #region Read Data
 
-        public async Task<PurchaseModel> GetPurchases()
+        public async Task<ObservableCollection<Purchase>> GetPurchases()
         {
-            PurchaseModel purchases = new PurchaseModel();
+            ObservableCollection<Purchase> purchases = new ObservableCollection<Purchase>();
 
             string filePath = GetFile(0);
 
@@ -138,7 +139,7 @@ namespace POS.Service
 
             if (!(jsonData == null || jsonData == string.Empty))
             {
-                purchases = JsonConvert.DeserializeObject<PurchaseModel>(jsonData);
+                purchases = JsonConvert.DeserializeObject<ObservableCollection<Purchase>>(jsonData);
             }
 
             return purchases;

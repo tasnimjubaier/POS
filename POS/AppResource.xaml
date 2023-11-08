@@ -3,11 +3,17 @@
 
 
     <SolidColorBrush x:Key="PrimaryColor" Color="White" />
+    <SolidColorBrush x:Key="ProminentColor">#FF3366CC</SolidColorBrush>
+
+    <LinearGradientBrush x:Key="Buttongradient" StartPoint="0.500023,0.999996" EndPoint="0.500023,4.37507e-006">
+        <GradientStop Color="#5e5e5e" Offset="1" />
+        <GradientStop Color="#0b0b0b" Offset="0" />
+    </LinearGradientBrush>
 
 
 
-
-
+    
+    
     <Style x:Key="NavigationButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="Black" />
@@ -20,6 +26,83 @@
                 <Setter Property="Background" Value="#3A3A3A" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    
+    
+    
+    
+    <Style x:Key="CircularButtons" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource ProminentColor}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}" Width="100" Height="100">
+                        <!-- Circular background -->
+                        <Ellipse Fill="{TemplateBinding Background}" Width="100" Height="100" />
+
+                        <!-- Plus sign in all four directions -->
+                        <Line X1="20" X2="80" Y1="50" Y2="50" Stroke="White" StrokeThickness="10" />
+                        <Line X1="50" X2="50" Y1="20" Y2="80" Stroke="White" StrokeThickness="10" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background" Value="Red" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="Background" Value="#EEEEEEEE"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 5"/>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border
+                                x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" />
+
+                        <ContentPresenter
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                Margin="{TemplateBinding Padding}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="OpacityMask" Value="#AA888888"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderThickness" Value="2"/>
+                            <!--<Setter Property="Background" Value="DimGray"/>-->
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#ADADAD"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 

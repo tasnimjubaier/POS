@@ -46,7 +46,10 @@ namespace POS.ViewModels
             switch (to)
             {
                 case "Purchase":
+                    View.LoadingView.Visibility = Visibility.Visible;
                     ContentViewModel = new PurchaseViewModel();
+                    await ((PurchaseViewModel)ContentViewModel).Initialize();
+                    View.LoadingView.Visibility = Visibility.Collapsed;
                     break;
                 case "Employee":
                     ContentViewModel = new EmployeeViewModel();

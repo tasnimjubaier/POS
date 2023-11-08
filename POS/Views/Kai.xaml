@@ -60,12 +60,11 @@
                     <DataGridTemplateColumn Header="Actions">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Click Me" Click="Button_Click" />
+                                <Button Content="hello" Click="Button_Click" Style="{StaticResource PrimaryButton}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
-
             </DataGrid>
         </StackPanel>
         <Popup Name="RowPopup" StaysOpen="True" IsOpen="False" HorizontalAlignment="Center" VerticalAlignment="Center">
