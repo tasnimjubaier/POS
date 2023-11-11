@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace POS.Models
         private static CustomerModel? _instance;
 
 
-        public ObservableCollection<Customer> _customers;
+        private ObservableCollection<Customer> _customers;
         public ObservableCollection<Customer> Customers
         {
             set
@@ -42,7 +43,7 @@ namespace POS.Models
 
         #region Methods
 
-        public void GetDataFromDB()
+        public async Task GetDataFromDB()
         {
 
         }
@@ -66,7 +67,8 @@ namespace POS.Models
 
         #region Properties
 
-        public int _id;
+        [JsonIgnore]
+        private int _id;
         public int Id
         {
             set
@@ -77,7 +79,8 @@ namespace POS.Models
             get { return _id; }
         }
 
-        public string? _name;
+        [JsonIgnore]
+        private string? _name;
         public string? Name
         {
             set
@@ -88,7 +91,8 @@ namespace POS.Models
             get { return _name; }
         }
 
-        public string? _address;
+        [JsonIgnore]
+        private string? _address;
         public string? Address
         {
             set
@@ -99,7 +103,8 @@ namespace POS.Models
             get { return _address; }
         }
 
-        public ObservableCollection<Bill> _bills;
+        [JsonIgnore]
+        private ObservableCollection<Bill> _bills;
         public ObservableCollection<Bill> Bills
         {
             set

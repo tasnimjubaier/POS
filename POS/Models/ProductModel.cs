@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace POS.Models
         private static ProductModel? _instance;
 
 
-        public ObservableCollection<Product> _products;
+        private ObservableCollection<Product> _products;
         public ObservableCollection<Product> Products
         {
             set
@@ -42,7 +43,7 @@ namespace POS.Models
 
         #region Methods
 
-        public void GetDataFromDB()
+        public async Task GetDataFromDB()
         {
 
         }
@@ -66,7 +67,8 @@ namespace POS.Models
 
         #region Properties
 
-        public int _id;
+        [JsonIgnore]
+        private int _id;
         public int Id
         {
             set
@@ -77,7 +79,8 @@ namespace POS.Models
             get { return _id; }
         }
 
-        public string? _name;
+        [JsonIgnore]
+        private string? _name;
         public string? Name
         {
             set
@@ -88,7 +91,8 @@ namespace POS.Models
             get { return _name; }
         }
 
-        public Unit _unit;
+        [JsonIgnore]
+        private Unit _unit;
         public Unit Unit
         {
             set
@@ -99,7 +103,8 @@ namespace POS.Models
             get { return _unit; }
         }
 
-        public int _unitPrice;
+        [JsonIgnore]
+        private int _unitPrice;
         public int UnitPrice
         {
             set
@@ -110,7 +115,8 @@ namespace POS.Models
             get { return _unitPrice; }
         }
 
-        public int _inStock;
+        [JsonIgnore]
+        private int _inStock;
         public int InStock
         {
             set
@@ -121,7 +127,8 @@ namespace POS.Models
             get { return _inStock; }
         }
 
-        public string? _category;
+        [JsonIgnore]
+        private string? _category;
         public string? Category
         {
             set
