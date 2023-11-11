@@ -66,5 +66,10 @@ namespace POS.Views
             B6.Background = new SolidColorBrush(Color.FromRgb(0x4D, 0x89, 0xB0));
             B7.Background = new SolidColorBrush(Color.FromRgb(0x4D, 0x89, 0xB0));
         }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ((ShellViewModel)this.DataContext).DashboardCommandExecute();
+        }
     }
 }

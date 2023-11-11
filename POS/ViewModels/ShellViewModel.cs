@@ -68,24 +68,57 @@ namespace POS.ViewModels
                     View.LoadingView.Visibility = Visibility.Collapsed;
                     break;
                 case "Bills":
-                    ContentViewModel = new EmployeeViewModel();
+                    View.LoadingView.Visibility = Visibility.Visible;
+
+                    ContentViewModel = new BillViewModel();
+                    await ((BillViewModel)ContentViewModel).Initialize();
+                    ((BillViewModel)ContentViewModel).ShowLoading += ShowLoadingEventHandler;
+                    ((BillViewModel)ContentViewModel).HideLoading += HideLoadingEventHandler;
+
+                    View.LoadingView.Visibility = Visibility.Collapsed;
                     break;
                 case "Customers":
-                    ContentViewModel = new EmployeeViewModel();
+                    View.LoadingView.Visibility = Visibility.Visible;
+
+                    ContentViewModel = new CustomerViewModel();
+                    await ((CustomerViewModel)ContentViewModel).Initialize();
+                    ((CustomerViewModel)ContentViewModel).ShowLoading += ShowLoadingEventHandler;
+                    ((CustomerViewModel)ContentViewModel).HideLoading += HideLoadingEventHandler;
+
+                    View.LoadingView.Visibility = Visibility.Collapsed;
                     break;
                 case "Products":
-                    ContentViewModel = new EmployeeViewModel();
+                    View.LoadingView.Visibility = Visibility.Visible;
+
+                    ContentViewModel = new ProductViewModel();
+                    await ((ProductViewModel)ContentViewModel).Initialize();
+                    ((ProductViewModel)ContentViewModel).ShowLoading += ShowLoadingEventHandler;
+                    ((ProductViewModel)ContentViewModel).HideLoading += HideLoadingEventHandler;
+
+                    View.LoadingView.Visibility = Visibility.Collapsed;
                     break;
                 case "Stock":
                     ContentViewModel = new EmployeeViewModel();
                     break;
                 case "BillCollection":
-                    ContentViewModel = new EmployeeViewModel();
+                    View.LoadingView.Visibility = Visibility.Visible;
+
+                    ContentViewModel = new BillCollectionViewModel();
+                    await ((BillCollectionViewModel)ContentViewModel).Initialize();
+                    ((BillCollectionViewModel)ContentViewModel).ShowLoading += ShowLoadingEventHandler;
+                    ((BillCollectionViewModel)ContentViewModel).HideLoading += HideLoadingEventHandler;
+
+                    View.LoadingView.Visibility = Visibility.Collapsed;
                     break;
             }
         }
 
-        private void HideLoadingEventHandler(object? sender, EventArgs e)
+        public void DashboardCommandExecute()
+        {
+            View.ResetButtons();
+            ContentViewModel = new DashboardViewModel();
+        }
+        public void HideLoadingEventHandler(object? sender, EventArgs e)
         {
             View.LoadingView.Visibility = Visibility.Collapsed;
         }
