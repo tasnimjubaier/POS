@@ -9,44 +9,21 @@
     <Grid>
         <StackPanel>
             <DataGrid
-              ItemsSource="{Binding PurchaseInstance.Purchases}" 
-              AutoGenerateColumns="False" 
-              IsReadOnly="False"
-              CanUserAddRows="True" 
-              CanUserDeleteRows="True" 
-              SelectionMode="Single"
-              SelectionUnit="FullRow"
-              MaxHeight="399"
+                ItemsSource="{Binding PurchaseInstance.Purchases}"
+                AutoGenerateColumns="False" 
+                IsReadOnly="True"
+                CanUserAddRows="False" 
+                CanUserDeleteRows="False" 
+                SelectionMode="Single"
+                SelectionUnit="FullRow"
+                MaxHeight="399"
                 Margin="9"
                 MinRowHeight="29"
                 MinColumnWidth="199"
                 CanUserSortColumns="False"
                 SelectionChanged="DataGrid_SelectionChanged"
+                Style="{StaticResource CustomDataGridStyle}"
                 >
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="DarkGray" />
-                        <Setter Property="Foreground" Value="PapayaWhip" />
-                        <Setter Property="FontSize" Value="23"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="AntiqueWhite" />
-                        <Setter Property="Foreground" Value="Black" />
-                        <!-- Add more setters for additional styles -->
-                    </Style>
-                </DataGrid.RowStyle>
-                <DataGrid.Resources>
-                    <Style TargetType="ScrollViewer">
-                        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
-                    </Style>
-                    <Style TargetType="{x:Type ScrollBar}">
-                        <Setter Property="Width" Value="2" />
-                        <Setter Property="MaxWidth" Value="2" />
-                        <!-- Add more setters for additional styles -->
-                    </Style>
-                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Date" Binding="{Binding Date}"></DataGridTextColumn>
@@ -56,7 +33,7 @@
                     <DataGridTemplateColumn Header="Actions">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="hello" Click="Button_Click" Style="{StaticResource PrimaryButton}" />
+                                <Button Content="hello" Click="Button_Click" Style="{StaticResource CircularButton}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
