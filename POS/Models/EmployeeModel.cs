@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace POS.Models
         private static EmployeeModel? _instance;
 
 
-        public ObservableCollection<Employee> _employees;
+        private ObservableCollection<Employee> _employees;
         public ObservableCollection<Employee> Employees
         {
             set
@@ -42,14 +43,14 @@ namespace POS.Models
 
         #region Methods
 
-        public void GetDataFromDB()
+        public async Task GetDataFromDB()
         {
-
+            //await Task.Delay(999);
         }
 
-        public void AddEmployee(Employee employee)
+        public void AddEmployee(string name, int id)
         {
-            Employees.Add(employee);
+            Employees.Add(new Employee { Name = name, Id = id });
         }
 
         #endregion
@@ -71,7 +72,8 @@ namespace POS.Models
 
         #region Properties
 
-        public int _id;
+        [JsonIgnore]
+        private int _id;
         public int Id
         {
             set
@@ -82,7 +84,8 @@ namespace POS.Models
             get { return _id; }
         }
 
-        public string? _name;
+        [JsonIgnore]
+        private string? _name;
         public string? Name
         {
             set
@@ -93,7 +96,8 @@ namespace POS.Models
             get { return _name; }
         }
 
-        public ObservableCollection<Employee> _attendances;
+        [JsonIgnore]
+        private ObservableCollection<Employee> _attendances;
         public ObservableCollection<Employee> Attendances
         {
             set
@@ -104,7 +108,8 @@ namespace POS.Models
             get { return _attendances; }
         }
 
-        public ObservableCollection<Payment> _payments;
+        [JsonIgnore]
+        private ObservableCollection<Payment> _payments;
         public ObservableCollection<Payment> Payments
         {
             set
@@ -115,7 +120,8 @@ namespace POS.Models
             get { return _payments; }
         }
 
-        public int _payableThisMonth;
+        [JsonIgnore]
+        private int _payableThisMonth;
         public int PayableThisMonth
         {
             set
@@ -149,7 +155,8 @@ namespace POS.Models
 
         #region Properties
 
-        public int _year;
+        [JsonIgnore]
+        private int _year;
         public int Year
         {
             set
@@ -160,7 +167,8 @@ namespace POS.Models
             get { return _year; }
         }
 
-        public int _month;
+        [JsonIgnore]
+        private int _month;
         public int Month
         {
             set
@@ -171,7 +179,8 @@ namespace POS.Models
             get { return _month; }
         }
 
-        public int _presentDays;
+        [JsonIgnore]
+        private int _presentDays;
         public int PresentDays
         {
             set
@@ -182,7 +191,8 @@ namespace POS.Models
             get { return _presentDays; }
         }
 
-        public int _monthlySalary;
+        [JsonIgnore]
+        private int _monthlySalary;
         public int MonthlySalary
         {
             set
@@ -193,7 +203,8 @@ namespace POS.Models
             get { return _monthlySalary; }
         }
 
-        public int _payableThisMonth;
+        [JsonIgnore]
+        private int _payableThisMonth;
         public int PayableThisMonth
         {
             set
@@ -204,7 +215,8 @@ namespace POS.Models
             get { return _payableThisMonth; }
         }
 
-        public int _paidAmount;
+        [JsonIgnore]
+        private int _paidAmount;
         public int PaidAmount
         {
             set
@@ -238,7 +250,8 @@ namespace POS.Models
 
         #region Properties
 
-        public DateTime _date;
+        [JsonIgnore]
+        private DateTime _date;
         public DateTime Date
         {
             set
@@ -249,7 +262,8 @@ namespace POS.Models
             get { return _date; }
         }
 
-        public int _amountPaid;
+        [JsonIgnore]
+        private int _amountPaid;
         public int AmountPaid
         {
             set
