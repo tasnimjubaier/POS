@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace POS.Models
         private static PurchaseModel? _instance;
 
 
-        public ObservableCollection<Purchase> _purchases;
+        private ObservableCollection<Purchase> _purchases;
         public ObservableCollection<Purchase> Purchases
         {
             set
@@ -44,7 +45,7 @@ namespace POS.Models
 
         public async Task GetDataFromDB()
         {
-            await Task.Delay(1000);
+
         }
 
         public void AddPurchase(Purchase purchase)
@@ -71,7 +72,8 @@ namespace POS.Models
 
         #region Properties
 
-        public int _id;
+        [JsonIgnore]
+        private int _id;
         public int Id
         {
             set
@@ -82,8 +84,9 @@ namespace POS.Models
             get { return _id; }
         }
 
-        public string _date;
-        public string Date
+        [JsonIgnore]
+        private DateTime _date;
+        public DateTime Date
         {
             set
             {
@@ -93,7 +96,8 @@ namespace POS.Models
             get { return _date; }
         }
 
-        public string? _name;
+        [JsonIgnore]
+        private string? _name;
         public string? Name
         {
             set
@@ -104,7 +108,8 @@ namespace POS.Models
             get { return _name; }
         }
 
-        public int _amount;
+        [JsonIgnore]
+        private int _amount;
         public int Amount
         {
             set
@@ -117,7 +122,8 @@ namespace POS.Models
 
         #endregion
 
-        public Purchase(int id, string dateTime, string name, int amount)
+        public Purchase() { }
+        public Purchase(int id, DateTime dateTime, string name, int amount)
         {
             Id = id;
             Date = dateTime;
