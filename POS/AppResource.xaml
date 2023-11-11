@@ -4,6 +4,11 @@
 
     <SolidColorBrush x:Key="PrimaryColor" Color="White" />
     <SolidColorBrush x:Key="ProminentColor" Color="#034587"/>
+    <SolidColorBrush x:Key="PrimaryColorShade1" Color="#034587"/>
+    <SolidColorBrush x:Key="PrimaryColorShade2" Color="#034587"/>
+    <SolidColorBrush x:Key="PrimaryColorShade3" Color="#9EC5DF"/>
+    <SolidColorBrush x:Key="PrimaryColorShade4" Color="#D9E9F4"/>
+    <SolidColorBrush x:Key="PrimaryColorShade5" Color="#E5EFF6"/>
 
     <LinearGradientBrush x:Key="Buttongradient" StartPoint="0.500023,0.999996" EndPoint="0.500023,4.37507e-006">
         <GradientStop Color="#5e5e5e" Offset="1" />
@@ -25,7 +30,9 @@
                                   Margin="0,5">
                         <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
                                    FontWeight="DemiBold" 
-                               FontSize="20" Padding="10" HorizontalAlignment="Center" />
+                               FontSize="20" Padding="10" HorizontalAlignment="Center" >
+                        </TextBlock>
+                        
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -33,9 +40,6 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#467DA1" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="#2C4C61" />
             </Trigger>
         </Style.Triggers>
     </Style>
