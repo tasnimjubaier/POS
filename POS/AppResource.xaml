@@ -3,7 +3,7 @@
 
 
     <SolidColorBrush x:Key="PrimaryColor" Color="White" />
-    <SolidColorBrush x:Key="ProminentColor">#FF3366CC</SolidColorBrush>
+    <SolidColorBrush x:Key="ProminentColor" Color="#034587"/>
 
     <LinearGradientBrush x:Key="Buttongradient" StartPoint="0.500023,0.999996" EndPoint="0.500023,4.37507e-006">
         <GradientStop Color="#5e5e5e" Offset="1" />
@@ -12,53 +12,129 @@
 
 
 
-    
-    
-    <Style x:Key="NavigationButton" TargetType="Button">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="Black" />
-        <Setter Property="FontWeight" Value="DemiBold" />
-        <Setter Property="FontSize" Value="20" />
-        <Setter Property="Padding" Value="10" />
-        <Setter Property="Margin" Value="0,5" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#3A3A3A" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
 
-    
-    
-    
-    
-    <Style x:Key="CircularButtons" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource ProminentColor}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="Width" Value="50" />
+    <!-- Button styles -->
+    <Style x:Key="NavigationButton" TargetType="Button">
+        <Setter Property="Background" Value="#4D89B0" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid Background="{TemplateBinding Background}" Width="100" Height="100">
-                        <!-- Circular background -->
-                        <Ellipse Fill="{TemplateBinding Background}" Width="100" Height="100" />
-
-                        <!-- Plus sign in all four directions -->
-                        <Line X1="20" X2="80" Y1="50" Y2="50" Stroke="White" StrokeThickness="10" />
-                        <Line X1="50" X2="50" Y1="20" Y2="80" Stroke="White" StrokeThickness="10" />
+                    <Grid Background="{TemplateBinding Background}"
+                                  Margin="0,5">
+                        <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="DemiBold" 
+                               FontSize="20" Padding="10" HorizontalAlignment="Center" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="RenderTransform">
-                    <Setter.Value>
-                        <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Background" Value="Red" />
+                <Setter Property="Background" Value="#467DA1" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#2C4C61" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="CircularButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource ProminentColor}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Width="30" Height="30">
+                        <!-- Circular background -->
+                        <Ellipse Fill="{TemplateBinding Background}" Width="30" Height="30" />
+
+                        <!-- Plus sign in all four directions -->
+                        <Line X1="7.5" X2="22.5" Y1="15" Y2="15" Stroke="White" StrokeThickness="2" />
+                        <Line X1="15" X2="15" Y1="7.5" Y2="22.5" Stroke="White" StrokeThickness="2" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Background" Value="#011f3d" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="GoBackButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource ProminentColor}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Width="30" Height="30">
+                        <Ellipse Fill="{TemplateBinding Background}" Width="30" Height="30" />
+
+                        <Line X1="7.5" X2="22.5" Y1="15" Y2="15" Stroke="White" StrokeThickness="3" />
+                        <Line X1="7.5" X2="11.5" Y1="15" Y2="11" Stroke="White" StrokeThickness="3" />
+                        <Line X1="7.5" X2="11.5" Y1="15" Y2="19" Stroke="White" StrokeThickness="3" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Background" Value="#011f3d" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TickButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource ProminentColor}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Width="100" Height="100">
+                        <Ellipse Fill="{TemplateBinding Background}" Width="100" Height="100" />
+
+                        <Line X1="19" X2="39" Y1="54" Y2="79" Stroke="White" StrokeThickness="9" />
+                        <Line X1="34" X2="79" Y1="79" Y2="32" Stroke="White" StrokeThickness="9" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Background" Value="#011f3d" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SmallTickButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource ProminentColor}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Width="30" Height="30">
+                        <Ellipse Fill="{TemplateBinding Background}" Width="30" Height="30" />
+
+                        <Line X1="7" X2="15" Y1="22" Y2="27" Stroke="White" StrokeThickness="4" />
+                        <Line X1="13" X2="27" Y1="27" Y2="11" Stroke="White" StrokeThickness="4" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Background" Value="#011f3d" />
             </Trigger>
         </Style.Triggers>
     </Style>
