@@ -17,7 +17,7 @@ namespace POS.ViewModels
 {
     public class PurchaseViewModel : IViewModel, INotifyPropertyChanged
     {
-        public UserControl _view;
+        private UserControl _view;
         public UserControl View
         {
             set
@@ -28,7 +28,7 @@ namespace POS.ViewModels
             get { return _view; }
         }
 
-        public PurchaseModel _purchaseInstance;
+        private PurchaseModel _purchaseInstance;
         public PurchaseModel PurchaseInstance
         {
             set
@@ -42,6 +42,9 @@ namespace POS.ViewModels
         ServiceManager service;
         public ICommand SaveData { get; }
 
+        public event EventHandler ShowLoading;
+        public event EventHandler HideLoading;
+
         public PurchaseViewModel()
         {
             View = new PurchaseView();
@@ -52,14 +55,18 @@ namespace POS.ViewModels
         public async Task Initialize()
         {
             PurchaseInstance = PurchaseModel.GetInstance();
-            await PurchaseInstance.GetDataFromDB();
             service = ServiceManager.GetInstance();
+            await PurchaseInstance.GetDataFromDB();
             PurchaseInstance.Purchases = await service.GetPurchases();
         }
 
         public async void SaveCommandExecute(object o)
         {
+            ShowLoading?.Invoke(this, EventArgs.Empty);
+
             await service.WritePurchases(PurchaseInstance.Purchases);
+
+            HideLoading?.Invoke(this, EventArgs.Empty);
         }
 
         #region INotifyPropertyChanged
