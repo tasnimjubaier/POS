@@ -7,9 +7,163 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Hello World from Employee" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-    >
+        <!-- Main view -->
+        <Grid Visibility="{Binding RootVisibility}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0" Margin="39" Height="499">
+                    <DataGrid
+                ItemsSource="{Binding EmployeeInstance.Employees}"
+                AutoGenerateColumns="False" 
+                IsReadOnly="True"
+                CanUserAddRows="False" 
+                CanUserDeleteRows="False" 
+                SelectionMode="Single"
+                SelectionUnit="FullRow"
+                Height="499"
+                Margin="9"
+                MinRowHeight="29"
+                MinColumnWidth="199"
+                CanUserSortColumns="False"
+                Style="{StaticResource CustomDataGridStyle}"
+                >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                            <DataGridTemplateColumn Header="Attendence">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="AttendenceButtonClick" Style="{StaticResource CircularButton}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Payments">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="PaymentsButtonClick" Style="{StaticResource CircularButton}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Button HorizontalAlignment="Right" Margin="99,1" Style="{StaticResource PrimaryButton}" Content="Add Employee" Command="{Binding AddEmployee}" />
+                </Grid>
+            </Grid>
+        </Grid>
+        
+        <!-- Attendence -->
+        <Grid Visibility="{Binding AttendenceVisibility}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
 
-        </TextBlock>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="19">
+                    <Button HorizontalAlignment="Left" Style="{StaticResource GoBackButton}"  Command="{Binding GoBack}" />
+                    <TextBlock Text="Go Back" FontSize="21" Margin="9,0" VerticalAlignment="Center"/>
+                </StackPanel>
+                
+                <Grid Grid.Row="1" Margin="39" Height="499">
+                    <DataGrid
+                ItemsSource="{Binding SelectedEmployee.Attendences}"
+                AutoGenerateColumns="False" 
+                IsReadOnly="True"
+                CanUserAddRows="False" 
+                CanUserDeleteRows="False" 
+                SelectionMode="Single"
+                SelectionUnit="FullRow"
+                Height="499"
+                Margin="9"
+                MinRowHeight="29"
+                MinColumnWidth="199"
+                CanUserSortColumns="False"
+                Style="{StaticResource CustomDataGridStyle}"
+                >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Button HorizontalAlignment="Right" Margin="99,1" Style="{StaticResource PrimaryButton}" Content="Add Attendence" Command="{Binding AddEmployee}" />
+                </Grid>
+            </Grid>
+        </Grid>
+        
+        <!-- Payments -->
+        <Grid Visibility="{Binding PaymentsVisibility}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="19">
+                    <Button HorizontalAlignment="Left" Style="{StaticResource GoBackButton}"  Command="{Binding GoBack}" />
+                    <TextBlock Text="Go Back" FontSize="21" Margin="9,0" VerticalAlignment="Center"/>
+                </StackPanel>
+                
+                <Grid Grid.Row="1" Margin="39" Height="499">
+                    <DataGrid
+                ItemsSource="{Binding EmployeeInstance.Payments}"
+                AutoGenerateColumns="False" 
+                IsReadOnly="True"
+                CanUserAddRows="False" 
+                CanUserDeleteRows="False" 
+                SelectionMode="Single"
+                SelectionUnit="FullRow"
+                Height="499"
+                Margin="9"
+                MinRowHeight="29"
+                MinColumnWidth="199"
+                CanUserSortColumns="False"
+                Style="{StaticResource CustomDataGridStyle}"
+                >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Button HorizontalAlignment="Right" Margin="99,1" Style="{StaticResource PrimaryButton}" Content="Add Payment" Command="{Binding AddEmployee}" />
+                    
+                </Grid>
+            </Grid>
+        </Grid>
+        
+        <!--add employee popup-->
+        <Popup x:Name="AddPopup" IsOpen="{Binding PopupVisibility}" Placement="Center" AllowsTransparency="True" StaysOpen="True">
+            <StackPanel>
+                <Border BorderBrush="Black" BorderThickness="1" Background="White" CornerRadius="5">
+                    <Grid Width="600" Height="550">
+                        <Button Content="Close" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5"  Command="{Binding ClosePopup}" />
+                        <StackPanel Width="400" Height="410" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <StackPanel Orientation="Vertical" Width="399" Margin="19">
+                                <TextBlock Text="Name:" Margin="9,1" FontSize="19"/>
+                                <TextBox Text="{Binding NewEmployeeName}" Width="169" FontSize="19" HorizontalAlignment="Left" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Width="399" Margin="19">
+                                <TextBlock Text="Id:" Margin="9,1" FontSize="19"/>
+                                <TextBox Text="{Binding NewEmployeeId}" IsReadOnly="True" FontSize="19" Width="169" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            <Button HorizontalAlignment="Right" Margin="99,1" 
+                                    Style="{StaticResource PrimaryButton}" Content="Save Employee" Command="{Binding SaveEmployee}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </Popup>
     </Grid>
 </UserControl>

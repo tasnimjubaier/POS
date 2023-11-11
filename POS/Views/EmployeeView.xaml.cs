@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace POS.Views
         public EmployeeView()
         {
             InitializeComponent();
+        }
+
+        private void AttendenceButtonClick(object sender, RoutedEventArgs e)
+        {
+            ((EmployeeViewModel)this.DataContext).AttendenceCommandExecute(sender);
+        }
+
+        private void PaymentsButtonClick(object sender, RoutedEventArgs e)
+        {
+            ((EmployeeViewModel)this.DataContext).PaymentsCommandExecute(sender);
         }
     }
 }
