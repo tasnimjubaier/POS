@@ -14,9 +14,15 @@ namespace POS.Service
 
         public string FolderName = "POSData";
         public List<string> JsonFiles = new List<string> { "Purchases.json", "Employees.json", "Customers.json", "Bills.json", "Products.json", "Categories.json" };
+
+        JsonSerializerSettings JsonSerializerSettings;
+
         public ServiceManager()
         {
             CreateDirectoryAndFiles();
+            JsonSerializerSettings = new JsonSerializerSettings();
+            JsonSerializerSettings.Formatting = Formatting.Indented;
+            JsonSerializerSettings.DateFormatString = "yyyy-MM-ddTHH:mm:ssZ";
         }
 
         public static ServiceManager GetInstance()
@@ -85,40 +91,40 @@ namespace POS.Service
 
         public async Task WritePurchases(ObservableCollection<Purchase> purchases)
         {
-            string jsonData = JsonConvert.SerializeObject(purchases);
+            string jsonData = JsonConvert.SerializeObject(purchases, JsonSerializerSettings);
             string filePath = GetFile(0);
             await File.WriteAllTextAsync(filePath, jsonData);
         }
 
-        public async void WriteEmployees(EmployeeModel employeeModel)
+        public async Task WriteEmployees(ObservableCollection<Employee> employees)
         {
-            string jsonData = JsonConvert.SerializeObject(employeeModel);
+            string jsonData = JsonConvert.SerializeObject(employees, JsonSerializerSettings);
             string filePath = GetFile(1);
             await File.WriteAllTextAsync(filePath, jsonData);
         }
 
-        public async void WriteCustomers(CustomerModel customerModel)
+        public async Task WriteCustomers(CustomerModel customerModel)
         {
             string jsonData = JsonConvert.SerializeObject(customerModel);
             string filePath = GetFile(2);
             await File.WriteAllTextAsync(filePath, jsonData);
         }
 
-        public async void WriteBills(BillModel billModel)
+        public async Task WriteBills(BillModel billModel)
         {
             string jsonData = JsonConvert.SerializeObject(billModel);
             string filePath = GetFile(3);
             await File.WriteAllTextAsync(filePath, jsonData);
         }
 
-        public async void WriteProducts(ProductModel productModel)
+        public async Task WriteProducts(ProductModel productModel)
         {
             string jsonData = JsonConvert.SerializeObject(productModel);
             string filePath = GetFile(4);
             await File.WriteAllTextAsync(filePath, jsonData);
         }
 
-        public async void WriteCategories(CategoryModel categoryModel)
+        public async Task WriteCategories(CategoryModel categoryModel)
         {
             string jsonData = JsonConvert.SerializeObject(categoryModel);
             string filePath = GetFile(5);
@@ -145,9 +151,9 @@ namespace POS.Service
             return purchases;
         }
 
-        public async Task<EmployeeModel> GetEmployees()
+        public async Task<ObservableCollection<Employee>> GetEmployees()
         {
-            EmployeeModel employees = new EmployeeModel();
+            ObservableCollection<Employee> employees = new ObservableCollection<Employee>();
 
             string filePath = GetFile(1);
 
@@ -155,15 +161,15 @@ namespace POS.Service
 
             if (!(jsonData == null || jsonData == string.Empty))
             {
-                employees = JsonConvert.DeserializeObject<EmployeeModel>(jsonData);
+                employees = JsonConvert.DeserializeObject<ObservableCollection<Employee>>(jsonData);
             }
 
             return employees;
         }
 
-        public async Task<CustomerModel> GetCustomers()
+        public async Task<ObservableCollection<Customer>> GetCustomers()
         {
-            CustomerModel customers = new CustomerModel();
+            ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
 
             string filePath = GetFile(2);
 
@@ -171,15 +177,15 @@ namespace POS.Service
 
             if (!(jsonData == null || jsonData == string.Empty))
             {
-                customers = JsonConvert.DeserializeObject<CustomerModel>(jsonData);
+                customers = JsonConvert.DeserializeObject<ObservableCollection<Customer>>(jsonData);
             }
 
             return customers;
         }
 
-        public async Task<BillModel> GetBills()
+        public async Task<ObservableCollection<Bill>> GetBills()
         {
-            BillModel bills = new BillModel();
+            ObservableCollection<Bill> bills = new ObservableCollection<Bill>();
 
             string filePath = GetFile(3);
 
@@ -187,15 +193,15 @@ namespace POS.Service
 
             if (!(jsonData == null || jsonData == string.Empty))
             {
-                bills = JsonConvert.DeserializeObject<BillModel>(jsonData);
+                bills = JsonConvert.DeserializeObject<ObservableCollection<Bill>>(jsonData);
             }
 
             return bills;
         }
 
-        public async Task<ProductModel> GetProducts()
+        public async Task<ObservableCollection<Product>> GetProducts()
         {
-            ProductModel products = new ProductModel();
+            ObservableCollection<Product> products = new ObservableCollection<Product>();
 
             string filePath = GetFile(4);
 
@@ -203,15 +209,15 @@ namespace POS.Service
 
             if (!(jsonData == null || jsonData == string.Empty))
             {
-                products = JsonConvert.DeserializeObject<ProductModel>(jsonData);
+                products = JsonConvert.DeserializeObject<ObservableCollection<Product>>(jsonData);
             }
 
             return products;
         }
 
-        public async Task<CategoryModel> GetCategories()
+        public async Task<ObservableCollection<string>> GetCategories()
         {
-            CategoryModel categories = new CategoryModel();
+            ObservableCollection<string> categories = new ObservableCollection<string>();
 
             string filePath = GetFile(5);
 
@@ -219,7 +225,7 @@ namespace POS.Service
 
             if (!(jsonData == null || jsonData == string.Empty))
             {
-                categories = JsonConvert.DeserializeObject<CategoryModel>(jsonData);
+                categories = JsonConvert.DeserializeObject<ObservableCollection<string>>(jsonData);
             }
 
             return categories;
