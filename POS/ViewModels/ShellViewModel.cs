@@ -43,16 +43,29 @@ namespace POS.ViewModels
         private async void SwitchCommandExecute(object param)
         {
             string to = (string)param;
+            View.SwitchButton(to);
+
             switch (to)
             {
                 case "Purchase":
                     View.LoadingView.Visibility = Visibility.Visible;
+
                     ContentViewModel = new PurchaseViewModel();
                     await ((PurchaseViewModel)ContentViewModel).Initialize();
+                    ((PurchaseViewModel)ContentViewModel).ShowLoading += ShowLoadingEventHandler;
+                    ((PurchaseViewModel)ContentViewModel).HideLoading += HideLoadingEventHandler;
+
                     View.LoadingView.Visibility = Visibility.Collapsed;
                     break;
                 case "Employee":
+                    View.LoadingView.Visibility = Visibility.Visible;
+
                     ContentViewModel = new EmployeeViewModel();
+                    await ((EmployeeViewModel)ContentViewModel).Initialize();
+                    ((EmployeeViewModel)ContentViewModel).ShowLoading += ShowLoadingEventHandler;
+                    ((EmployeeViewModel)ContentViewModel).HideLoading += HideLoadingEventHandler;
+
+                    View.LoadingView.Visibility = Visibility.Collapsed;
                     break;
                 case "Bills":
                     ContentViewModel = new EmployeeViewModel();
@@ -70,6 +83,16 @@ namespace POS.ViewModels
                     ContentViewModel = new EmployeeViewModel();
                     break;
             }
+        }
+
+        private void HideLoadingEventHandler(object? sender, EventArgs e)
+        {
+            View.LoadingView.Visibility = Visibility.Collapsed;
+        }
+
+        public void ShowLoadingEventHandler(object? sender, EventArgs e)
+        {
+            View.LoadingView.Visibility = Visibility.Visible;
         }
 
         #region INotifyPropertyChanged
