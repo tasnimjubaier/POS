@@ -1,11 +1,9 @@
-﻿using POS.Commands;
-using POS.Interfaces;
+﻿using POS.Interfaces;
 using POS.Models;
 using POS.Service;
 using POS.Views;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -15,9 +13,9 @@ using System.Windows.Input;
 
 namespace POS.ViewModels
 {
-    public class PurchaseViewModel : IViewModel, INotifyPropertyChanged
+    public class BillCollectionViewModel : IViewModel, INotifyPropertyChanged
     {
-        private UserControl _view;
+        public UserControl _view;
         public UserControl View
         {
             set
@@ -28,45 +26,36 @@ namespace POS.ViewModels
             get { return _view; }
         }
 
-        private PurchaseModel _purchaseInstance;
-        public PurchaseModel PurchaseInstance
+        private BillModel _billInstance;
+        public BillModel BillInstance
         {
             set
             {
-                _purchaseInstance = value;
-                OnPropertyChanged("purchaseInstance");
+                _billInstance = value;
+                OnPropertyChanged("billInstance");
             }
-            get { return _purchaseInstance; }
+            get { return _billInstance; }
         }
 
         ServiceManager service;
-        public ICommand SaveData { get; }
+        public ICommand AddEmployee { get; }
 
         public event EventHandler ShowLoading;
         public event EventHandler HideLoading;
 
-        public PurchaseViewModel()
+
+        public BillCollectionViewModel()
         {
-            View = new PurchaseView();
+            View = new BillCollectionView();
             View.DataContext = this;
-            SaveData = new RelayCommand(SaveCommandExecute);
         }
 
         public async Task Initialize()
         {
-            PurchaseInstance = PurchaseModel.GetInstance();
+            BillInstance = BillModel.GetInstance();
             service = ServiceManager.GetInstance();
-            await PurchaseInstance.GetDataFromDB();
-            PurchaseInstance.Purchases = await service.GetPurchases();
-        }
-
-        public async void SaveCommandExecute(object o)
-        {
-            ShowLoading?.Invoke(this, EventArgs.Empty);
-
-            await service.WritePurchases(PurchaseInstance.Purchases);
-
-            HideLoading?.Invoke(this, EventArgs.Empty);
+            await BillInstance.GetDataFromDB();
+            BillInstance.Bills = await service.GetBills();
         }
 
         #region INotifyPropertyChanged

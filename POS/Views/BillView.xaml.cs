@@ -1,5 +1,4 @@
-﻿using POS.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,23 +16,18 @@ using System.Windows.Shapes;
 namespace POS.Views
 {
     /// <summary>
-    /// Interaction logic for Employee.xaml
+    /// Interaction logic for BillView.xaml
     /// </summary>
-    public partial class EmployeeView : UserControl
+    public partial class BillView : UserControl
     {
-        public EmployeeView()
+        public BillView()
         {
             InitializeComponent();
         }
 
-        private void AttendenceButtonClick(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ((EmployeeViewModel)this.DataContext).AttendenceCommandExecute(sender);
-        }
 
-        private void PaymentsButtonClick(object sender, RoutedEventArgs e)
-        {
-            ((EmployeeViewModel)this.DataContext).PaymentsCommandExecute(sender);
         }
     }
 }

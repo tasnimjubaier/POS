@@ -1,11 +1,9 @@
-﻿using POS.Commands;
-using POS.Interfaces;
+﻿using POS.Interfaces;
 using POS.Models;
 using POS.Service;
 using POS.Views;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -15,9 +13,9 @@ using System.Windows.Input;
 
 namespace POS.ViewModels
 {
-    public class PurchaseViewModel : IViewModel, INotifyPropertyChanged
+    public class ProductViewModel : IViewModel, INotifyPropertyChanged
     {
-        private UserControl _view;
+        public UserControl _view;
         public UserControl View
         {
             set
@@ -28,45 +26,47 @@ namespace POS.ViewModels
             get { return _view; }
         }
 
-        private PurchaseModel _purchaseInstance;
-        public PurchaseModel PurchaseInstance
+        private ProductModel _productInstance;
+        public ProductModel ProductInstance
         {
             set
             {
-                _purchaseInstance = value;
-                OnPropertyChanged("purchaseInstance");
+                _productInstance = value;
+                OnPropertyChanged("productInstance");
             }
-            get { return _purchaseInstance; }
+            get { return _productInstance; }
+        }
+
+        private Product _selectedProduct;
+        public Product SelectedProduct
+        {
+            set
+            {
+                _selectedProduct = value;
+                OnPropertyChanged("selectedProduct");
+            }
+            get { return _selectedProduct; }
         }
 
         ServiceManager service;
-        public ICommand SaveData { get; }
+        public ICommand AddEmployee { get; }
 
         public event EventHandler ShowLoading;
         public event EventHandler HideLoading;
 
-        public PurchaseViewModel()
+
+        public ProductViewModel()
         {
-            View = new PurchaseView();
+            View = new ProductView();
             View.DataContext = this;
-            SaveData = new RelayCommand(SaveCommandExecute);
         }
 
         public async Task Initialize()
         {
-            PurchaseInstance = PurchaseModel.GetInstance();
+            ProductInstance = ProductModel.GetInstance();
             service = ServiceManager.GetInstance();
-            await PurchaseInstance.GetDataFromDB();
-            PurchaseInstance.Purchases = await service.GetPurchases();
-        }
-
-        public async void SaveCommandExecute(object o)
-        {
-            ShowLoading?.Invoke(this, EventArgs.Empty);
-
-            await service.WritePurchases(PurchaseInstance.Purchases);
-
-            HideLoading?.Invoke(this, EventArgs.Empty);
+            await ProductInstance.GetDataFromDB();
+            ProductInstance.Products = await service.GetProducts();
         }
 
         #region INotifyPropertyChanged

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace POS.Models
         private static BillModel? _instance;
 
 
-        public ObservableCollection<Bill> _bills;
+        private ObservableCollection<Bill> _bills;
         public ObservableCollection<Bill> Bills
         {
             set
@@ -42,7 +43,7 @@ namespace POS.Models
 
         #region Methods
 
-        public void GetDataFromDB()
+        public async Task GetDataFromDB()
         {
 
         }
@@ -66,7 +67,8 @@ namespace POS.Models
 
         #region Properties
 
-        public int _id;
+        [JsonIgnore]
+        private int _id;
         public int Id
         {
             set
@@ -77,7 +79,8 @@ namespace POS.Models
             get { return _id; }
         }
 
-        public DateTime _date;
+        [JsonIgnore]
+        private DateTime _date;
         public DateTime Date
         {
             set
@@ -88,7 +91,8 @@ namespace POS.Models
             get { return _date; }
         }
 
-        public string? _customerName;
+        [JsonIgnore]
+        private string? _customerName;
         public string? CustomerName
         {
             set
@@ -99,7 +103,8 @@ namespace POS.Models
             get { return _customerName; }
         }
 
-        public int _customerId;
+        [JsonIgnore]
+        private int _customerId;
         public int CustomerId
         {
             set
@@ -110,7 +115,8 @@ namespace POS.Models
             get { return _customerId; }
         }
 
-        public int _amount;
+        [JsonIgnore]
+        private int _amount;
         public int Amount
         {
             set
@@ -121,7 +127,8 @@ namespace POS.Models
             get { return _amount; }
         }
 
-        public int _amountCollected;
+        [JsonIgnore]
+        private int _amountCollected;
         public int AmountCollected
         {
             set
@@ -132,7 +139,8 @@ namespace POS.Models
             get { return _amountCollected; }
         }
 
-        public ObservableCollection<ReceivedPayment> _payments;
+        [JsonIgnore]
+        private ObservableCollection<ReceivedPayment> _payments;
         public ObservableCollection<ReceivedPayment> Payments
         {
             set
@@ -143,7 +151,8 @@ namespace POS.Models
             get { return _payments; }
         }
 
-        public Status _status;
+        [JsonIgnore]
+        private Status _status;
         public Status Status
         {
             set
@@ -177,7 +186,8 @@ namespace POS.Models
 
         #region Properties
 
-        public DateTime _date;
+        [JsonIgnore]
+        private DateTime _date;
         public DateTime Date
         {
             set
@@ -188,7 +198,8 @@ namespace POS.Models
             get { return _date; }
         }
 
-        public int _amount;
+        [JsonIgnore]
+        private int _amount;
         public int Amount
         {
             set

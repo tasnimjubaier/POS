@@ -11,7 +11,7 @@
         <StackPanel>
             <TextBlock Text="{Binding Purchase.Vie.Message}"></TextBlock>
             <TextBlock Text="{Binding Purchase.Vie.SelectedItem.Name}"></TextBlock>
-            <Button Command="{Binding MyCommand}">change text</Button>
+            <Button Command="{Binding MyCommand}" Style="{StaticResource TickButton}">change text</Button>
 
             <DataGrid
           ItemsSource="{Binding Purchase.Vie.Data}" 
@@ -27,40 +27,28 @@
         MinColumnWidth="199"
         CanUserSortColumns="False"
         SelectionChanged="DataGrid_SelectionChanged"
+                Style="{StaticResource CustomDataGridStyle}"
+                ScrollViewer.CanContentScroll="False"
         >
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="DarkGray" />
-                        <Setter Property="Foreground" Value="PapayaWhip" />
-                        <Setter Property="FontSize" Value="23"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="AntiqueWhite" />
-                        <Setter Property="Foreground" Value="Black" />
-                        <!-- Add more setters for additional styles -->
-                    </Style>
-                </DataGrid.RowStyle>
-                <DataGrid.Resources>
-                    <Style TargetType="ScrollViewer">
-                        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
-                    </Style>
-                    <Style TargetType="{x:Type ScrollBar}">
-                        <Setter Property="BorderBrush" Value="DarkRed" />
-                        <Setter Property="Background" Value="Red" />
-                        <Setter Property="Width" Value="2" />
-                        <Setter Property="MaxWidth" Value="2" />
-                        <!-- Add more setters for additional styles -->
-                    </Style>
-                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
-                    <DataGridTemplateColumn Header="Actions">
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"></DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Actions" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="hello" Click="Button_Click" Style="{StaticResource PrimaryButton}" />
+                                <Button Content="hello" Click="Button_Click" Style="{StaticResource TickButton}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Combobox">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox SelectedIndex="1">
+                                    <ComboBoxItem>one</ComboBoxItem>
+                                    <ComboBoxItem>two</ComboBoxItem>
+                                    <ComboBoxItem>three</ComboBoxItem>
+                                    <ComboBoxItem>four</ComboBoxItem>
+                                </ComboBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

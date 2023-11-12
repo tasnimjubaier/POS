@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POS.Views"
         mc:Ignorable="d"
-        Title="Shell" WindowStyle="ToolWindow" WindowState="Maximized" 
-        Background="AliceBlue" ResizeMode="CanResize" AllowsTransparency="False">
+        Title="" WindowStyle="ToolWindow" WindowState="Maximized" 
+        Background="{StaticResource PrimaryColorShade5}" ResizeMode="CanResize" AllowsTransparency="False">
 
     <Grid>
         <Border>
@@ -16,20 +16,23 @@
                     <ColumnDefinition Width="80*" />
                 </Grid.ColumnDefinitions>
                 
-                <Border Grid.Column="0" Background="{StaticResource PrimaryColor}">
+                <Border Grid.Column="0" Background="{StaticResource PrimaryColorShade4}">
                     <StackPanel Orientation="Vertical">
-                        <Label Height="200" />
-                        <Button Command="{Binding SwitchCommand}" CommandParameter="Purchase" Style="{StaticResource NavigationButton}" Content="Purchase" />
-                        <Button Command="{Binding SwitchCommand}" CommandParameter="Employee" Style="{StaticResource NavigationButton}" Content="Employee" />
-                        <Button Command="{Binding SwitchCommand}" CommandParameter="Bills" Style="{StaticResource NavigationButton}" Content="Bills" />
-                        <Button Command="{Binding SwitchCommand}" CommandParameter="Customers" Style="{StaticResource NavigationButton}" Content="Customers" />
-                        <Button Command="{Binding SwitchCommand}" CommandParameter="Products" Style="{StaticResource NavigationButton}" Content="Products" />
-                        <Button Command="{Binding SwitchCommand}" CommandParameter="Stock" Style="{StaticResource NavigationButton}" Content="Stock" />
-                        <Button Command="{Binding SwitchCommand}" CommandParameter="BillCollection" Style="{StaticResource NavigationButton}" Content="Bill Collection" />
+                        <Label Height="50" Content="DashBoard" Foreground="{StaticResource PrimaryColorShade2}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontSize="29" FontWeight="DemiBold" FontFamily="Segoe UI" Cursor="Hand"
+                               MouseDown="Label_MouseDown"/>
+                        <Label Height="29" />
+                        <Button x:Name="B1" Command="{Binding SwitchCommand}" CommandParameter="Purchase" Style="{StaticResource NavigationButton}" Content="Purchase" />
+                        <Button x:Name="B2" Command="{Binding SwitchCommand}" CommandParameter="Employee" Style="{StaticResource NavigationButton}" Content="Employee" />
+                        <Button x:Name="B3" Command="{Binding SwitchCommand}" CommandParameter="Bills" Style="{StaticResource NavigationButton}" Content="Bills" />
+                        <Button x:Name="B4" Command="{Binding SwitchCommand}" CommandParameter="Customers" Style="{StaticResource NavigationButton}" Content="Customers" />
+                        <Button x:Name="B5" Command="{Binding SwitchCommand}" CommandParameter="Products" Style="{StaticResource NavigationButton}" Content="Products" />
+                        <Button x:Name="B6" Command="{Binding SwitchCommand}" CommandParameter="Stock" Style="{StaticResource NavigationButton}" Content="Stock" />
+                        <Button x:Name="B7" Command="{Binding SwitchCommand}" CommandParameter="BillCollection" Style="{StaticResource NavigationButton}" Content="Bill Collection" />
                     </StackPanel>
                 </Border>
                 
-                <Border Grid.Column="1" Background="LightCyan">
+                <Border Grid.Column="1" Background="{StaticResource PrimaryColorShade5}">
                     <ContentControl Content="{Binding ContentViewModel.View}" />
                 </Border>
             </Grid>

@@ -13,7 +13,7 @@ namespace POS.Models
         private static CategoryModel? _instance;
 
 
-        public ObservableCollection<string> _categories;
+        private ObservableCollection<string> _categories;
         public ObservableCollection<string> Categories
         {
             set
