@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid
+        <Grid Visibility="{Binding RootVisibility}">
+            <DataGrid
                 ItemsSource="{Binding BillInstance.Bills}"
                 AutoGenerateColumns="False" 
                 IsReadOnly="True"
@@ -18,26 +19,48 @@
                 MaxHeight="399"
                 Margin="9"
                 MinRowHeight="29"
+                CanUserSortColumns="False"
+                Style="{StaticResource CustomDataGridStyle}"
+                >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="2*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="2*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Customer Name" Binding="{Binding CustomerName}" Width="2*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Bill Amount" Binding="{Binding Amount}" Width="2*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Amount Collected" Binding="{Binding AmountCollected}" Width="2*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="2*"></DataGridTextColumn>
+
+                    <DataGridTemplateColumn Header="Payments" Width="2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="Button_Click" Style="{StaticResource CircularButton}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Visibility="{Binding PaymentsVisibility}">
+            <DataGrid
+                ItemsSource="{Binding SelectedBill.Payments}"
+                AutoGenerateColumns="False" 
+                IsReadOnly="True"
+                CanUserAddRows="False" 
+                CanUserDeleteRows="False" 
+                SelectionMode="Single"
+                SelectionUnit="FullRow"
+                Height="499"
+                Margin="9"
+                MinRowHeight="29"
                 MinColumnWidth="199"
                 CanUserSortColumns="False"
                 Style="{StaticResource CustomDataGridStyle}"
                 >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Date" Binding="{Binding Date}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Customer Name" Binding="{Binding CustomerName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Bill Amount" Binding="{Binding Amount}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Amount Collected" Binding="{Binding AmountCollected}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Status" Binding="{Binding Status}"></DataGridTextColumn>
-
-                <DataGridTemplateColumn Header="Payments">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="Button_Click" Style="{StaticResource CircularButton}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>
