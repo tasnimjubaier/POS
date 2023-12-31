@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace POS.Views
         public CustomerView()
         {
             InitializeComponent();
+        }
+
+        private void SeeDetailsButtonClick(object sender, RoutedEventArgs e)
+        {
+            ((CustomerViewModel)this.DataContext).SeeDetailsCommandExecute(sender);
         }
     }
 }

@@ -30,10 +30,18 @@
                     <DataGridTextColumn Header="Amount Collected" Binding="{Binding AmountCollected}" Width="2*"></DataGridTextColumn>
                     <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="2*"></DataGridTextColumn>
 
-                    <DataGridTemplateColumn Header="Payments" Width="2*">
+                    <DataGridTemplateColumn Header="See Details" Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Click="Button_Click" Style="{StaticResource CircularButton}" />
+                                <Button Click="See_Details_Click" Style="{StaticResource CircularButton}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Print" Width="2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="Print_Click" Style="{StaticResource CircularButton}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

@@ -117,6 +117,12 @@ namespace POS.ViewModels
             SelectedBill = (Bill)((Button)sender).DataContext;
         }
 
+        public async void PrintCommandExecute(object sender)
+        {
+            SelectedBill = (Bill)((Button)sender).DataContext;
+
+        }
+
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler? PropertyChanged;

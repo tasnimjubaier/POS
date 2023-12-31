@@ -45,6 +45,9 @@ namespace POS.ViewModels
         public event EventHandler ShowLoading;
         public event EventHandler HideLoading;
 
+        /// <summary>
+        /// search by || print || add purchase
+        /// </summary>
         public PurchaseViewModel()
         {
             View = new PurchaseView();

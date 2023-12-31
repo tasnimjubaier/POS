@@ -26,9 +26,14 @@ namespace POS.Views
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void See_Details_Click(object sender, RoutedEventArgs e)
         {
             ((BillViewModel)this.DataContext).LoadPaymentsView(sender);
+        }
+
+        private void Print_Click(object sender, RoutedEventArgs e)
+        {
+            ((BillViewModel)this.DataContext).PrintCommandExecute(sender);
         }
     }
 }
