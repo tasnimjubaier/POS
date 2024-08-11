@@ -1,0 +1,19 @@
+name: Environment Variables Example
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      VAR1: "hello"
+      VAR2: "${{ env.VAR1 }} world"
+      VAR3: "${{ env.VAR2 }}!"
+
+    steps:
+      - name: Print environment variables
+        run: |
+          echo VAR1: $VAR1
+          echo VAR2: $VAR2
+          echo VAR3: $VAR3
