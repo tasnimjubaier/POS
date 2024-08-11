@@ -6,14 +6,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      VAR1: "hello"
-      VAR2: "${{ env.VAR1 }} world"
-      VAR3: "${{ env.VAR2 }}!"
-
     steps:
+      - name: Set up environment variables
+        run: |
+          echo "VAR1=hello" >> $GITHUB_ENV
+          echo "VAR2=${{ env.VAR1 }} world" >> $GITHUB_ENV
+          echo "VAR3=${{ env.VAR2 }}!" >> $GITHUB_ENV
+
       - name: Print environment variables
         run: |
           echo VAR1: $VAR1
           echo VAR2: $VAR2
           echo VAR3: $VAR3
+        env:
+          VAR1: ${{ env.VAR1 }}
+          VAR2: ${{ env.VAR2 }}
+          VAR3: ${{ env.VAR3 }}
+
